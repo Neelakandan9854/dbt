@@ -1,18 +1,12 @@
 {{
-    config(
-        materialized ='table'
-    )
+  config(
+    materialized='view'
+  )
 }}
 
-
-
-with customers as(
-
-    select 
+select
     id as customer_id,
     first_name,
     last_name
 
-    from raw.jaffle_shop.customers
-)
-select * from customers
+from {{ source('jaffle_shop', 'customers') }}
